@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #0b1616;
+}
+
+.theme-noir {
+  --stage-bg:
+    radial-gradient(circle at 12% 20%, rgba(0, 224, 255, 0.28), transparent 24%),
+    radial-gradient(circle at 40% 8%, rgba(83, 255, 178, 0.13), transparent 28%),
+    radial-gradient(circle at 84% 24%, rgba(200, 255, 84, 0.18), transparent 25%),
+    radial-gradient(circle at 70% 78%, rgba(255, 107, 95, 0.16), transparent 30%),
+    linear-gradient(135deg, #0b1616 0%, #102729 34%, #172719 64%, #171416 100%);
+  --mesh-opacity: 0.68;
+  --grid-opacity: 0.18;
+}
+
+.theme-signal {
+  --stage-bg:
+    radial-gradient(circle at 16% 18%, rgba(255, 107, 95, 0.24), transparent 28%),
+    radial-gradient(circle at 72% 14%, rgba(0, 224, 255, 0.22), transparent 26%),
+    radial-gradient(circle at 46% 82%, rgba(200, 255, 84, 0.16), transparent 30%),
+    linear-gradient(135deg, #101516 0%, #1c2418 42%, #102529 100%);
+  --mesh-opacity: 0.72;
+  --grid-opacity: 0.18;
+}
+
+.bg-stage {
+  background: var(--stage-bg);
+}
+
+.ambient-mesh {
+  background:
+    linear-gradient(110deg, transparent 0 28%, rgba(255, 255, 255, 0.055) 28.2% 28.6%, transparent 28.8% 100%),
+    linear-gradient(70deg, transparent 0 63%, rgba(0, 224, 255, 0.07) 63.2% 63.6%, transparent 63.8% 100%),
+    radial-gradient(circle at 50% 50%, transparent 0%, rgba(7, 17, 18, 0.38) 66%, rgba(7, 17, 18, 0.78) 100%);
+  opacity: var(--mesh-opacity);
+  mix-blend-mode: screen;
+}
+
+.ambient-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at 50% 36%, black 0%, transparent 70%);
+  opacity: var(--grid-opacity);
+}
+
+.ambient-noise {
+  background-image:
+    linear-gradient(120deg, rgba(255,255,255,0.03), transparent 45%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 6px);
+  opacity: 0.38;
+}
+
+.surface-hover {
+  transform: translateZ(0);
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.surface-hover:hover {
+  transform: translate3d(0, -6px, 0);
+  border-color: rgba(0, 224, 255, 0.42);
+  box-shadow: 0 24px 80px rgba(0, 224, 255, 0.09), 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+.action-hover {
+  transform: translateZ(0);
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.action-hover:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 14px 34px rgba(0, 224, 255, 0.14);
+}
+
+.portrait-float {
+  animation: portrait-float 5.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes portrait-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+.boot-loader {
+  animation: boot-loader-hide 0.45s 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, transform, filter;
+}
+
+.boot-loader * {
+  will-change: transform, opacity;
+}
+
+@keyframes boot-loader-hide {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(1.02);
+    filter: blur(10px);
+  }
+}
+
+a,
+button {
+  cursor: none;
+}
+
+@media (max-width: 767px) {
+  a,
+  button {
+    cursor: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
